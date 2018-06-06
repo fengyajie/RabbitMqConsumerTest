@@ -78,7 +78,8 @@
 <!-- queue litener  观察 监听模式 当有消息到达时会通知监听在对应的队列上的监听对象-->
 <!-- queues：监听的队列，多个的话用逗号（,）分隔 ref：监听器 -->
 <!-- acknowledge=auto：消费者自动接收,manual:手动确认 ,自动确认，接收到信息后，消息从队列删除；手动确认：手动确认之后才会删除-->
-    <rabbit:listener-container   connection-factory="connectionFactory" acknowledge="manual">
+<!-- concurrency:开启线程数处理信息,prefetch:处理完一条信息再接收信息,此两个属性值可根据处理能力设置 -->
+    <rabbit:listener-container   connection-factory="connectionFactory" acknowledge="manual" concurrency="1" prefetch="1">
     <rabbit:listener  queue-names="xxx" method="onMessage" ref="rabbmitmqQueueListener"/>
     <rabbit:listener queue-names="xxx-1" method="onMessage" ref="rabbmitmqQueueListener"/>
     <rabbit:listener queue-names="xxx-2" method="onMessage" ref="rabbmitmqQueueListener"/>
